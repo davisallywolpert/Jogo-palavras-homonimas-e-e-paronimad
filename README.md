@@ -1,29 +1,101 @@
-# Jogo-palavras-homonimas-e-paronimas
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jogo Didático: Palavras Homônimas e Parônimas</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Jogo de Palavras Homônimas e Parônimas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 0;
+        }
+        main {
+            padding: 20px;
+        }
+        .question {
+            margin: 20px 0;
+        }
+        .btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .btn:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Jogo Didático: Palavras Homônimas e Parônimas</h1>
-        <div id="question-container">
-            <p id="question"></p>
-            <div id="options-container">
-                <button class="option-btn" onclick="checkAnswer(0)">Opção 1</button>
-                <button class="option-btn" onclick="checkAnswer(1)">Opção 2</button>
-                <button class="option-btn" onclick="checkAnswer(2)">Opção 3</button>
-                <button class="option-btn" onclick="checkAnswer(3)">Opção 4</button>
-            </div>
+    <header>
+        <h1>Jogo de Palavras Homônimas e Parônimas</h1>
+    </header>
+    <main>
+        <div class="question">
+            <p id="word-pair">Clique em "Iniciar" para começar!</p>
         </div>
-        <div id="result-container">
-            <p id="result"></p>
-            <button id="next-btn" onclick="nextQuestion()">Próxima Pergunta</button>
-        </div>
-    </div>
-    <script src="script.js"></script>
+        <button class="btn" onclick="checkAnswer('homonima')">Homônima</button>
+        <button class="btn" onclick="checkAnswer('paronima')">Parônima</button>
+        <div class="result" id="result"></div>
+        <button class="btn" onclick="startGame()">Iniciar</button>
+    </main>
+
+    <script>
+        const pairs = [
+            { words: "censo / senso", type: "paronima" },
+            { words: "acento / assento", type: "paronima" },
+            { words: "cela / sela", type: "paronima" },
+            { words: "cego / sego", type: "paronima" },
+            { words: "cela / sela", type: "paronima" },
+            { words: "tacha / taxa", type: "paronima" },
+            { words: "acender / ascender", type: "paronima" },
+            { words: "cela / sela", type: "paronima" },
+            { words: "chá / xá", type: "homonima" },
+            { words: "cela / sela", type: "paronima" },
+            { words: "cego / sego", type: "paronima" },
+            { words: "cozer / coser", type: "paronima" },
+            { words: "dúvida / dívida", type: "paronima" },
+            { words: "elogio / alogio", type: "paronima" },
+            { words: "emigrar / imigrar", type: "paronima" },
+            { words: "emergir / imergir", type: "paronima" },
+            { words: "flagrante / fragrante", type: "paronima" },
+            { words: "inflação / infração", type: "paronima" },
+            { words: "ratificar / retificar", type: "paronima" },
+            { words: "tacha / taxa", type: "paronima" }
+        ];
+
+        let currentPair = {};
+
+        function startGame() {
+            document.getElementById("result").textContent = "";
+            currentPair = pairs[Math.floor(Math.random() * pairs.length)];
+            document.getElementById("word-pair").textContent = currentPair.words;
+        }
+
+        function checkAnswer(answer) {
+            if (currentPair.type === answer) {
+                document.getElementById("result").textContent = "Correto! " + currentPair.words + " são palavras " + currentPair.type + "s.";
+            } else {
+                document.getElementById("result").textContent = "Errado! " + currentPair.words + " são palavras " + currentPair.type + "s.";
+            }
+            setTimeout(startGame, 2000);
+        }
+    </script>
 </body>
 </html>
+
